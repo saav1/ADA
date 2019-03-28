@@ -6,10 +6,17 @@
 #include <iterator>
 using namespace std;
 
-typedef struct celda{
+struct celda{
   bool accesible;
 };
 
+struct Maze{
+  static string matrix; //La matriz
+  static int filas;
+  static int columnas; //Tamaño
+};
+
+//..........................................................................................
 bool argsValid(vector<string> &line, string &fileName, vector<string> &extraParam, int argc, char* argv[]){
   if(argc <= 6){
     for(int i = 1; i < argc; i++){
@@ -47,7 +54,6 @@ bool argsValid(vector<string> &line, string &fileName, vector<string> &extraPara
 void readFile(string fileName,string &matrix, int &filas, int &columnas){
   string line;
   char c;
-
   ifstream myFile (fileName.c_str());
   if( myFile.is_open() ){
     matrix = "";
@@ -62,8 +68,13 @@ void readFile(string fileName,string &matrix, int &filas, int &columnas){
     cout << "No se pudo abrir el archivo" << endl;
   }
 }
+//..........................................................................................
 
-//Los argumentos son -f -p --ignore-recursive -f
+//..........................................................................................
+void recursivoSinAlmcn(){
+
+}
+//..........................................................................................
 int main(int argc, char* argv[])
 {
   vector<string> line;
@@ -72,11 +83,12 @@ int main(int argc, char* argv[])
   string matrix = "null";
   int filas = 0;
   int columnas = 0;
+  Maze maze;
 
-  bool argsOk = argsValid(line, fileName, extraParam, argc, argv);
 
-  if(argsOk){
+  if(argsValid(line, fileName, extraParam, argc, argv)){
     readFile(fileName, matrix, filas, columnas);
+    recursivoSinAlmcn();
   }
 
   cout << matrix;
