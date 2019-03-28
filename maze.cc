@@ -17,6 +17,16 @@ struct Maze{
 };
 
 //..........................................................................................
+string extraerString(string lineal){
+	string s_name;
+	for( int i = 0 ; i < (int)lineal.length() ; i++){
+    if(lineal[i] != ' '){
+      s_name += lineal[i];
+    }
+	}
+	return s_name;
+}
+
 bool argsValid(vector<string> &line, string &fileName, vector<string> &extraParam, int argc, char* argv[]){
   if(argc <= 6){
     for(int i = 1; i < argc; i++){
@@ -54,14 +64,15 @@ bool argsValid(vector<string> &line, string &fileName, vector<string> &extraPara
 void readFile(string fileName,string &matrix, int &filas, int &columnas){
   string line;
   char c;
+  int cont = 0;
   ifstream myFile (fileName.c_str());
   if( myFile.is_open() ){
     matrix = "";
     myFile >> filas;
     myFile >> columnas;
     while( getline(myFile,line) ){
-      matrix += line;
-      matrix += "\n";
+      matrix += extraerString(line);
+      matrix += '\n';
     }
     myFile.close();
   }else{
@@ -71,7 +82,7 @@ void readFile(string fileName,string &matrix, int &filas, int &columnas){
 //..........................................................................................
 
 //..........................................................................................
-void recursivoSinAlmcn(){
+void recursivoSinAlmcn(string matrix, int i, int j){
 
 }
 //..........................................................................................
@@ -83,16 +94,12 @@ int main(int argc, char* argv[])
   string matrix = "null";
   int filas = 0;
   int columnas = 0;
-  Maze maze;
-
-
+  
   if(argsValid(line, fileName, extraParam, argc, argv)){
-    readFile(fileName, matrix, filas, columnas);
-    recursivoSinAlmcn();
+    readFile(fileName, matrix, filas, columnas); //Paso por referencia
+    recursivoSinAlmcn(matrix, filas, columnas); //Paso por valor
   }
-
   cout << matrix;
-
   return 0;
 }
 
