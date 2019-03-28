@@ -1,19 +1,48 @@
 #include <iostream>
+#include <string.h>
+#include <vector>
 using namespace std;
 
 
 //
+typedef struct celda{
+  bool accesible;
+};
 
 
+void imprimirC(vector<string> line){
+  for(int i = 0 ; i < line.size() ; i++){
+    cout << line[i] << endl;
+  }
+}
 
+void imprimirC(string line){
+  cout << "File name: " << line << endl;
+}
 
 //Los argumentos son -f -p --ignore-recursive -f
 int main(int argc, char* argv[])
 {
-  char op
-  for(int i = 0 ; i < argc ; i++){
-    cout << argc << ": " << argv[i] << endl;
+  vector<string> line;
+  string fileName;
+
+  cout << "argc: " << argc << endl;
+
+
+  if(argc <= 6){
+    for(int i = 1; i < argc; ++i){
+      if(i + 1 < argc){
+        line.push_back(argv[i]);
+      }else{
+        fileName = argv[i];
+      }
+    }
+  }else{
+
   }
+
+  imprimirC(line);
+  imprimirC(fileName);
 
   return 0;
 }
