@@ -1,7 +1,12 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include <fstream>
+#include <sstream>
+#include <iterator>
+
 using namespace std;
+
 
 
 //
@@ -10,39 +15,96 @@ typedef struct celda{
 };
 
 
-void imprimirC(vector<string> line){
+void imprimirC(const vector<string> line){
   for(int i = 0 ; i < line.size() ; i++){
     cout << line[i] << endl;
   }
 }
-
 void imprimirC(string line){
-  cout << "File name: " << line << endl;
+  cout << "FileName: " << line << endl;
 }
+bool argsValid(vector<string> &line, string &fileName, vector<string> &extraParam, int argc, char* argv[]){
+
+  if(argc <= 6){
+    for(int i = 1; i < argc; i++){
+      if(strcmp(argv[i],"-f") == 0){
+        if( i + 1 < argc ){
+          fileName = argv[i+1];
+          i++;
+        }
+      }else{
+        line.push_back(argv[i]);
+      }
+
+    }
+  }else{
+    return false;
+  }
+
+  if(fileName.compare("null") == 0){
+    cout << "Error: File name" << endl;
+    return false;
+  }
+
+  for(int i = 0; i < line.size()  ; i++){
+
+    if( line[i].compare("-t") == 0 || line[i].compare("-p") == 0 ||
+    line[i].compare("--ignore-recursive") == 0 ){
+      extraParam.push_back(line[i]);
+    }
+
+
+    if( line[i].compare("-t") != 0 && line[i].compare("-p") != 0 &&
+    line[i].compare("--ignore-recursive") != 0 &&
+    line[i].compare("-f") != 0){
+      cout << "Error: Argumento no esperado " << line[i] << endl;
+      return false;
+    }
+  }
+  return true;
+}
+
+void readFile(string fileName,string &matrix, int &filas, int &columnas){
+  string line;
+  char c;
+
+  ifstream myFile (fileName.c_str());
+  if( myFile.is_open() ){
+    matrix = "";
+
+
+    myFile >> filas;
+    myFile >> columnas;
+
+    while( getline(myFile,line) ){
+      matrix += line;
+      matrix += "\n";
+    }
+    myFile.close();
+  }else{
+    cout << "No se pudo abrir el archivo" << endl;
+  }
+}
+
 
 //Los argumentos son -f -p --ignore-recursive -f
 int main(int argc, char* argv[])
 {
   vector<string> line;
-  string fileName;
+  vector<string> extraParam;
+  string fileName = "null";
+  string matrix = "null";
+  int filas = 0;
+  int columnas = 0;
 
-  cout << "argc: " << argc << endl;
+  bool argsOk = argsValid(line, fileName, extraParam, argc, argv);
 
-
-  if(argc <= 6){
-    for(int i = 1; i < argc; ++i){
-      if(i + 1 < argc){
-        line.push_back(argv[i]);
-      }else{
-        fileName = argv[i];
-      }
-    }
-  }else{
-
+  if(argsOk){
+    //Los argumentos están bien.
+    readFile(fileName, matrix, filas, columnas);
   }
 
-  imprimirC(line);
-  imprimirC(fileName);
+  cout << matrix << "\n" << filas << "  "  << columnas << endl;
 
   return 0;
 }
