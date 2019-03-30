@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iterator>
+#include <algorithm>
 using namespace std;
 
 struct celda{
@@ -16,15 +17,15 @@ struct Maze{
   static int columnas; //Tamaño
 };
 
+int sFilas = 0;
+int sColumnas = 0;
+int intArray[100][100];
+
 //..........................................................................................
-string extraerString(string lineal){
-	string s_name;
-	for( int i = 0 ; i < (int)lineal.length() ; i++){
-    if(lineal[i] != ' '){
-      s_name += lineal[i];
-    }
-	}
-	return s_name;
+void extraerString(string &str){
+  int i = 0, len, j;
+  len = str.length();
+  str.erase(remove(str.begin(), str.end(), ' '), str.end());
 }
 
 bool argsValid(vector<string> &line, string &fileName, vector<string> &extraParam, int argc, char* argv[]){
@@ -44,7 +45,9 @@ bool argsValid(vector<string> &line, string &fileName, vector<string> &extraPara
     return false;
   }
   if(fileName.compare("null") == 0){
-    cout << "Error: File name" << endl;
+    cout << "ERROR: can't open file: " << fileName << "." << endl;
+    cout << "Usage:"<<endl;
+    cout << "maze [-p] [-t] [--ignore-recursive] -f file"<<endl;
     return false;
   }
   for(int i = 0; i < line.size()  ; i++){
@@ -55,13 +58,15 @@ bool argsValid(vector<string> &line, string &fileName, vector<string> &extraPara
     if( line[i].compare("-t") != 0 && line[i].compare("-p") != 0 &&
     line[i].compare("--ignore-recursive") != 0 &&
     line[i].compare("-f") != 0){
-      cout << "Error: Argumento no esperado " << line[i] << endl;
+      cout << "ERROR: unknown option " << line[i] << "." <<endl;
+      cout << "Usage:"<<endl;
+      cout << "maze [-p] [-t] [--ignore-recursive] -f file"<<endl;
       return false;
     }
   }
   return true;
 }
-void readFile(string fileName,string &matrix, int &filas, int &columnas){
+bool readFile(string fileName,string &matrix, int &filas, int &columnas){
   string line;
   char c;
   int cont = 0;
@@ -70,21 +75,86 @@ void readFile(string fileName,string &matrix, int &filas, int &columnas){
     matrix = "";
     myFile >> filas;
     myFile >> columnas;
+
     while( getline(myFile,line) ){
-      matrix += extraerString(line);
-      matrix += '\n';
+      matrix += line;
     }
+    extraerString(matrix);
     myFile.close();
-  }else{
-    cout << "No se pudo abrir el archivo" << endl;
+    return true;
   }
+
+  cout << "ERROR: can't open file: " << fileName << "." << endl;
+  cout << "Usage:"<<endl;
+  cout << "maze [-p] [-t] [--ignore-recursive] -f file"<<endl;
+  return false;
 }
 //..........................................................................................
 
+
 //..........................................................................................
-void recursivoSinAlmcn(string matrix, int i, int j){
+void convertToArray(string matrix, int &filas,int &columnas){
+  int i = 0; //filas
+  int j = 0; //columnas
+  string aux = "";
+  sFilas = filas;
+  sColumnas = columnas;
+
+  for(int cont = 0 ; cont < filas*columnas; cont++){
+
+    if(j >= columnas){
+      j = 0;
+      i++;
+    }
+    aux = matrix[cont];
+    intArray[i][j] = stoi(aux);
+    j++;
+  }
+
 
 }
+
+int caminosRecursivo = 0;
+int recursivoSinAlmcn(int intArray[][100],int i, int j, int filas, int columnas){
+
+  if(i == filas-1 && j == columnas-1){
+    caminosRecursivo++;
+    return 0;
+  }
+  //Derecha
+  if(intArray[i][j+1]==1 && recursivoSinAlmcn(intArray,i,j+1,filas,columnas)){
+    return 1;
+  }
+  //Abajo
+  if(intArray[i+1][j]==1 && recursivoSinAlmcn(intArray,i+1,j,filas,columnas)){
+    return 1;
+  }
+  //Diagonal
+  if(intArray[i+1][j+1]==1 && recursivoSinAlmcn(intArray,i+1,j+1,filas,columnas)){
+    return 1;
+  }
+
+  return 0;
+}
+
+
+void imprimirSol(vector<string> param){
+
+  cout << "Recursive: " << caminosRecursivo << endl;
+  cout << "Memoization: ¿?" << endl;
+  cout << "Iterative: ¿?" << endl;
+  cout << "Iterative (vector): ¿?" << endl << endl;
+  if(std::find(param.begin(), param.end(), "-t") != param.end()){
+    cout << "Memoization table:" << endl << "¿?"<<endl<<endl;
+    cout << "Iterative table:" << endl << "¿?" << endl<<endl;
+  }
+  if(std::find(param.begin(), param.end(), "-p") != param.end()){
+    cout << "A possible path:" << endl << "¿?" << endl<<endl;
+  }
+
+}
+
+
 //..........................................................................................
 int main(int argc, char* argv[])
 {
@@ -94,12 +164,17 @@ int main(int argc, char* argv[])
   string matrix = "null";
   int filas = 0;
   int columnas = 0;
-  
+
   if(argsValid(line, fileName, extraParam, argc, argv)){
-    readFile(fileName, matrix, filas, columnas); //Paso por referencia
-    recursivoSinAlmcn(matrix, filas, columnas); //Paso por valor
+    if(readFile(fileName, matrix, filas, columnas)){
+      convertToArray(matrix , filas, columnas);
+      int camino = recursivoSinAlmcn(intArray,0,0,filas,columnas);
+      imprimirSol(extraParam);
+    }
+
   }
-  cout << matrix;
+
+
   return 0;
 }
 
