@@ -1,2 +1,2 @@
 all:
-	g++ maze.cc -o maze
+	g++ mazegreedy.cc -o mazegreedy
