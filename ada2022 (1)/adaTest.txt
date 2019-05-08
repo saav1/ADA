@@ -1,0 +1,286 @@
+................................ADA TEST................................
+1. ¿La estrategia de 'vuelta atrás' garantiza la solución óptima?
+  Es condición necesaria que el dominio de las decisiones sea discreto y que
+  el número de decisiones a tomar esté acotado.
+
+2. ¿En los algoritmos de ramificación y poda?
+  Una cota optimista es necesariamente un valor insuperable, de no ser así se
+  podría podar el nodo que conduce a la solución óptima.
+
+3. La solución recursiva...
+  ...se puede mejorar la eficiencia del algoritmo guardando en una tabla el
+  valor devuelto para cada conjunto de parámetros de cada llamada cuando
+  ésta se produce por primera vez.
+  ...se puede mejorar la eficiencia del algoritmo definiendo de antemano el
+  orden en el que se deben calcular las soluciones a los subproblemas y
+  llenando una tabla en ese orden.
+  ...NO se puede mejorar la eficiencia del algoritmo convirtiendo el algoritmo
+  recursivo directamente en iterativo sin cambiar su funcionamiento básico.
+
+4. Si un problema de optimización tiene una función que toma valores CONTINUOS
+  ...la prog. dinámica RECURSIVA puede resultar mucho más eficiente que
+  la prog. dinámica ITERATIVA en cuanto al uso de memoria.
+
+5. El uso de funciones de cota en ramificación y poda
+  ...puede reducir el número de instancias del problema que pertenencen al caso
+  peor.
+
+6. Al resolver el problema del viajante de comercio mediante vuelta atrás,
+¿Cuál de estas cotas optimistas se espera que pode mejor el árbol de búsquedad?
+  ...1. Se ordenan las aristas restantes de menor a mayor distancia.
+     2. Se calcula la suma de las 'k' aristas más cortas. 'k' es el número de
+     saltos que nos quedan por dar.
+
+7. Existe una solución voraz para el problema
+  ...del árbol de recubrimiento mínimo para un grafo no dirigido con pesos.
+
+8. PROBLEMA: Se desea encontrar el camino más corto entre dos ciudades. Para
+ello se dispone de una tabla con la distancia entre los pares de ciudades en
+los que hay carreteras o un valor centinela (ej: -1) si no hay, por lo que ir
+de la ciudad inicial a la final es posible que haya que pasar por varias cuidades.
+También se conocen las coordenadas geográficas de cada cuidad y por tanto la
+distancia geométrica (en línea recta) entre cada par de cuidades. Se pretende
+acelerar la búsquedad de un algoritmo de 'ramificación y poda' priorizando los
+nodos vivos(cuidades) que estén a menor distancia geográfica de la cuidad
+objetivo.
+
+  SOLUCIÓN: El nuevo algoritmo no garantiza que vaya a ser más rápido para todas
+  las instancias del problema posibles.
+
+9. La complejidad temporal en el mejor de los casos...
+  ...es una función del tamaño del problema, que tiene que estar definida para
+  todos los posibles valores de ésta.
+
+10. La mejor solución para el problema de la mochila continua sigue el esquema
+ ...de DIVIDE Y VENCERÁS.
+
+11. La complejidad en el mejor de los casos de un algoritmo de 'ramificación y
+poda'..
+  ...puede ser polinómica con el número de decisiones a tomar.
+
+12. Cuando se usa un algoritmo voraz para abordar la resolución de un problema
+de optimización por selección discreta...
+  ...puede pasar que el algoritmo no encuentre ninguna solución.
+  ...puede que la solución no sea la óptima.
+
+13. Cuando la descomposición recursiva de un problema da lugar a subproblemas
+de tamaño similiar, ¿Qué esquema promete ser más apropiado?
+  ...PROGRAMACIÓN DINÁMICA.
+
+14. Sea la siguiente relación de recurencia 'T(n) = 2T(n/2) + g(n)'
+Si T(n)EO(n^2)  nos podemos encontrar con
+  ...g(n) = n.
+  ...g(n) = 1.
+  ...NUNCA nos encontraremos con g(n) n^2
+
+15. Un algoritmo recursivo basado en el esquema 'divide y vencerás'
+  ...será más eficiente cuanto más equitativa sea la división en subproblemas.
+
+16. En el esquema de vuelt atrás, los mecanismos de poda basados en la mejor
+solución hasta el momento...
+  ...pueden eleminar soluciones parciales que son factibles.
+
+17. El problema de las torres de HANOI no tiene solución en PROG. DINÁMICA.
+
+18. El valor que se obtiene con el método voraz para el problema de la mochila
+discreta es..
+  ...una cota inferior para el valor óptimo que a veces puede ser igual a este.
+
+19. Decid cuál de estas tres es la cota pesimista más ajustada al valor óptimo
+de la mochila discreta...
+  ...el valor de la mochila discreta que se obtiene usando un algoritmo voraz
+  basado en el valor específico de los objetos.
+
+20. Un problema de tamaño 'n' puede transformarse en tiempo 'O(n^2)' en otro de
+tamaño 'n - 1'.
+
+20.1. La solución al problema cuando la talla es 1 requiere un tiempo constante.
+La clase de coste temporal asintótico más ajustada es 'O(n^3)'.
+
+21. PROGRAMA EN CÓDIGO.
+
+22. Situación IMPOSIBLE:  'f(n) Ohm(n^2) y f(n) O(n)'
+
+23. Sea 'A' una matriz cuadrada 'n x m'. Se trata de buscar una permutación de
+las columnas tal que la suma de los elementos de la diagonal de la matriz resultante
+sea mínima.
+  ...la complejidad temporal de la mejor solución posible al problema es O(n!).
+  ...Si se construye una solución al problema basada en el esquema de 'ramificación y
+  poda', una buena elección de cotas optimistas y pesismistas podría evitar la
+  exploración de todas las permutaciones posibles.
+  ..es FALSO que la complejidad temporal de la mejor solución sea 'O(n^2)'.
+
+24. Qué algoritmo proveerá una cota PESIMISTA para el problema de encontrar el
+camino más corto entre dos ciudades (grafo es conexo)
+  ... Calcular la distancia recorrida moviéndose al azar por el grafo
+  hasta llegar (por azar) a la ciudad de destino.
+
+25. Si para resolver un mismo problema usamos un algoritmo de vuelta atrás y lo
+modificamos mínimamente para convertirlo en un algoritmo de ramificación y poda,
+¿Qué cambiamos realmente?
+  ..El algoritmo puede aprovechar mejor las cotas optimistas.
+
+26. PROBLEMA CÓDIGO.
+
+27. En una cuadrículo se quiere dibujar el contorno de un cuadrado de 'n' casillas
+de lado. ¿Cuál será la complejidad temporal del mejor algoritmo que pueda existir?
+  ... O(n)
+
+30. Garantiza el uso de una estrategia 'divide y vencerás' la existencia de una
+solución de complejidad temporal polinómica a cualquier problema?
+    ..No
+
+31. En el esquema 'vuelta atrás' el orden en el que se van asignando los distintos
+valores a las componentes del vector que contendrá la solución...
+  ...es irrelevante si no se utilizan mecnismos de poda basados en la mejor
+  solución haste el momento.
+  ...puede ser relevante si se utilizan mecanismos de poda basados en estimaciones
+  optimistas.
+
+32. La versión de 'Quicksort' que se utiliza como pivote el elemento del vector que
+ocupa la primera posición...
+  ...se comporta pero cuando el vector ya está ordenado.
+
+33. El problema de la mochila discreta no se puede utilizar una solución VORAZ.
+
+34. En problema donde el dominio de las decisiones es un conjunto infinito
+  ...una estrategia voraz puede ser la única alternativa.
+
+35. Dado un problema de optimización, el método voraz..
+  ...NO siempre obtiene la solución óptima.
+  ...garantiza la solución óptima para determinados problemas.
+  ...NO siempre obtiene una solución factible.
+
+36. La mejora que en general aporta la programación dinámica frente a la solución
+ingenua se consigue gracias al hecho de que..
+  ...en la solución ingenua se resuelve muchas veces un número relativamente
+  pequeño de subproblemas distintos.
+
+37. PROBLEMA CÓDIGO.
+
+38. El problema del cambio tiene una solución eficiente en PROG. DINÁMICA.
+
+39. QUICKSORT Y MERGESORT son algoritmos de 'divide y vencerás'.
+39.1. El algoritmo de PRIM no es de 'divide y vencerás'.
+
+40. Puede pasa que si f(n) O(n^3)  ->>> f(n) O(n^2)? SI.
+
+....................PÁGINA 9.....................................
+
+1. PROBLEMA CÓDIGO.
+
+3. ¿Cuál de de estas estrategias para calcular el n-ésimo elemento
+de la serie de Fibonaci es más eficiente?
+  ...Programación dinámica.
+
+4. En los algoritmos de 'ramificación y poda' ¿El valor de una cota
+pesimista es menor que el valor de una cota optimista?
+  ...En general sí, si se trata de un problema de maximización.
+
+5.
+
+6. Garantiza el uso de una estrategia 'divide y vencerás' la existencia
+de una solución de complejidad temporal polinómica a cualquier problema?
+  ...NO
+
+7. Problema que no tiene solución trivial y eficiente que siga el esquema
+voraz?
+  ...Problema del cambio.
+
+8. Relación de recurrencia: T(n) pT(n/q) + g(n) que produce esta relación?
+  ...Divide y vencerás
+
+14. ¿Cuál es la diferencia principal entre una solución de vuelta atrás y
+una solución de ramificación y poda para el problema de la mochila?
+  ...El orden de exploración de las soluciones.
+
+15. El algoritmo 'Quicksort' divide el problema en dos subproblemas. ¿Cuál
+es la complejidad temporal asintótica de realizar esa división?
+  ...O(n)
+
+17. En un algoritmo de 'ramificación y poda' si la lista de nodos vivos no
+está ordenada de forma apropiada
+  ...prodía ocurrir que se exploren nodos de forma innecesaria.
+
+19. Los algoritmos de 'vuelta atrás' que hacen uso de cotas optimistas
+generan las soluciones posibles al problema mediante
+  ...un recorrido en profundidad del árbol que representa el espacio de
+  soluciones.
+
+20. ¿Qué tienen en común el algoritmo que obtiene el k-ésimo elemento
+más pequeño de un vector y el algoritmo de ordenación 'Quicksort'?
+  ...La división del problema en subproblemas.
+
+22. ¿Se puede reducir el coste temporal de un algoritmo recursivo
+almacenando los resultados devueltos por llamadas recursivas?
+  ...Sí, si se repiten las llamadas a la función con los mismos argumentos.
+
+23. Cuando la descomposición recursiva de un problema da lugar a
+subproblemas de tamaño similiar, ¿Que esquema promete ser el más apropiado?
+  ...Programación dinámica.
+
+26. Cuál es la cota pesimista más ajustada al valor óptimo de la mochila
+  ...El valor de la mochila que se obtiene usando un algoritmo voraz basado
+  en el valor específico de los objetos.
+
+27. ¿Cuál de estos problemas tiene una solución eficiente utilizando prog.
+dinámica?
+  ...El problema del cambio.
+
+28. Que criterio proveería una cota pesimista para el problema de encontrar
+el camino más corto entre dos ciudades.
+  ...Calcular la distancia geométrica (en línea recta) entre ciudad origen
+  y destino.
+
+32. 2T(n/2) + g(n) puede ser ->>  1. g(n) O(n) ||  2. g(n) O(1).
+
+34. Si f(n) O(n^2) se puede decir que ->> f(n) O(n^3). OK!.
+
+35. La versión de 'Quicksort' que utiliza como pivote el elemento del vector
+que ocupa la posición central
+  ...se comporta mejor cuando el vector ya está ordenado.
+
+.....................PÁGINA 15.....................
+
+7. La complejidad temporal de la solución de 'vuelta atrás' al problema de
+la mochila discreta es
+  ...exponencial en el caso peor.
+
+10. Ante un problema de optimización  resuelto mediante 'backtracking'
+¿Puede ocurrir que el uso de las cotas pesimistas y optimistas sea inútil
+incluso perjudicial?
+  ...Sí, puesto que es posible que a pesar de utilizar dichas cotas no se
+  descarte ningún nodo.
+
+11. ¿Qué se entiende por tamaño del problema?
+  ...La cantidad de espacio en memoria que se necesita para codificar una
+  instancia de ese problema.
+
+21.
+  ...La solución de programación dinámica iterativa al problema de la
+  mochila discreta realiza cálculos innecesarios.
+  ...La memoización evita que un algoritmo recursivo ingenuo resuelva
+  repetidamente el mismo problema.
+
+22. El algoritmo de ordenación 'Mergesort' divide el problema en dos
+subproblemas.
+  ...La complejidad temporal es de O(1)
+
+24. Los algoritmos voraces se basan en la idea de que la solución óptima
+se puede construir añadiendo repetidamente el mejor elemento disponible.
+
+25. En los algoritmos de 'backtracking' ¿Puede el valor de una cota pesimista
+ser mayor que el valor de una cota optimista?
+  ...En general sí, si se trata de un problema de minimización, aunque en
+  ocasiones ambos valores pueden coincidir.
+
+26.
+  ...Hay problemas de optimizaicón en los cuales el método voraz sólo obtiene
+  la solución óptima para algunas instancias y un subóptimo para muchas otras
+  instancias.
+  ...Hay problemas de optimización para los cuales se puede obtener siempre
+  la solución óptima utilizando una estrategia voraz.
+  ...La memoización evita que un algoritmo recursivo ingenuo resuelva repetidamente
+  el mismo problema.
+  ...NO todos los problemas de optimización tienen una solución voraz que
+  es óptima, sea cual sea la instancia voraz.

@@ -1,0 +1,86 @@
+n elementos
+mi maximo numero de veces que podiamos fabricar el elemento i
+ti tiempo de fabricar el elemento i
+vi valor de fabricar el element i
+T tiempo total
+
+Solucion
+	tupla de n elementos donde xi es la cantidad
+	de veces que fabricamos el elemento i.
+
+Funcion de expansion.
+	para el elemento i desde 0 hasta mi
+
+Funcion valor	
+	sumatorio(vi*xi)
+
+Funcion restriccion
+	sumatorio(ti*xi) <= T 
+	xi <= mi para todo i.
+
+Cota pesimista.
+	Voraz discreto. Sabemos que va a ser peor o igual
+	que la mejor solucion.
+
+Cota optimista.
+	Voraz continuo. Sabemos que va a ser mejor o igual
+	que la mejor solucion.
+
+Para seleccionar el nodo del conjunto de nodos vivos
+la optimista, cogemos el nodo mas prometedor, buscada guiada.
+
+El nodo se expande cuando cota optimista es mejor que
+la mejor solucion encontrada hasta el momento o la solucion
+pesimista.
+
+INICIALMENTE TOMAMOS COMO SOLUCION DEL PROBLEMA LA SOLUCION
+VORAZ DISCRETO (PESIMISTA) DEL PROBLEMA.
+
+OPTIMA = MEJOR SOLUCION DEL PROBLEMA.
+
+COTA PESIMISTA: ES UNA SOLUCION QUE ES PEOR O IGUAL
+QUE LA OPTIMA.
+
+COTA OPTIMISTA DE UN NODO. ES UNA SOLUCION QUE ES MEJOR
+O IGUAL QUE LA OPTIMA.
+
+PODAMOS CUANDO LA OPTIMISTA ES PEOR QUE LA PESIMISTA.
+
+LA MEJOR SOLUCION ENCONTRADA HASTA EL MOMENTO PUEDE SER
+PEOR QUE LA COTA PESIMISTA.
+
+CUANDO SE ACTUALIZA LA COTA PESIMISTA: CUANDO ES MEJOR
+QUE LA COTA PESIMISTA QUE TENEMOS O CUANDO ENCONTRAMOS
+UNA SOLUCION QUE ES MEJOR QUE LA COTA PESIMISTA QUE TENEMOS.
+
+Ante un problema de maximizacion el nodo se descarta si
+su cota optimista tiene menor valor que la cota pesimista.
+
+Ante un problema de minimizacion el nodo se descarta
+si su cota optimista tiene mayor valor que la cota pesimista.
+
+CRITERIO VORAZ PARA EL ALFARERO
+	1. ti/vi (practica)
+	2. menor tiempo.
+	3. mayor valor.
+
+COMPLEJIDAD DEL ALFARERO POR VORAZ.
+	N.LOG(N)	ORDENACION.
+
+DINAMICA
+	ESPACIAL DEPENDE DEL ALMACEN
+		MATRIZ DE NxM DESDE N=0 Y LA FILA DE DERECHA A IZQ
+		O DE IZQ A DERECHA PORQUE NOS APOYAMOS SIEMPRE
+		EN LA FILA DE ARRIBA.
+		VECTOR DE N (RECORRIENDOLO DE DERECHA A IZQUIERDA)
+	TEMPORAL
+		O(N·T·M)
+
+BACKTRACKING
+	M·M·M·M·M·M·M······M (N VECES) = M^N
+
+
+
+
+
+

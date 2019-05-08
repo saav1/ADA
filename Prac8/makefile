@@ -1,0 +1,3 @@
+#STALYN ALEJANDRO ALCOCER VALENCIA DNI: 20947870E
+all:
+	g++ maze-bt.cc -o maze-bt
